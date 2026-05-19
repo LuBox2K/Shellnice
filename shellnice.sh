@@ -157,5 +157,8 @@ SCRIPT
 	echo 'setup done — rebooting in 5 seconds. press ctrl+c to abort.'
 	sleep 5
 	reboot
-} 
+}
+
+{
 main "$@"
+}
