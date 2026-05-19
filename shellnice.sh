@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 IFS= read -r -d '' WELCOME << 'EOF'
   _________.__           .__  .__         .__              
@@ -44,7 +45,7 @@ main() {
 	if [ "$REBOOT" == true ]; then
 		reboot_routine
 	else
-		echo "swapping shells"
+		echo "swapping to zsh"
 		exec zsh -c "echo \"$WELCOME\"; echo 'installation complete. rerun with -r to reboot after install'; exec zsh -l"
 	fi
 }
@@ -70,7 +71,7 @@ neovim
 EOF
 
 echo "running Postinstall commands"
-CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended 
+CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended < /dev/null
 apt -y upgrade
 chsh -s $(which zsh) ${SUDO_USER:-$USER}
 
