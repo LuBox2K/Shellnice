@@ -44,8 +44,7 @@ main() {
 	if [ "$REBOOT" == true ]; then
 		reboot_routine
 	else
-		echo "$WELCOME"
-		echo 'installation complete. rerun with -r to reboot after install'
+		exec zsh -c "echo \"$WELCOME\"; echo 'installation complete. rerun with -r to reboot after install'; exec zsh -l"
 	fi
 }
 
@@ -157,6 +156,4 @@ SCRIPT
 	sleep 5
 	reboot
 } 
-
-#############################################################
 main "$@"
