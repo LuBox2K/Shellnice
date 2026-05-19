@@ -75,58 +75,6 @@ EOF
 	while read -r command; do
 		eval "$command"
 	done <<EOF
-sh -c "\$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-apt -y upgrade
-chmain() {
-	## handle cli flags
-	while getopts "reh" opt; do
-		case $opt in
-			r)	REBOOT=true;;
-			e)	EXTENDED=true;;
-			h)	echo "$HELP";exit;;
-		esac
-	done
-
-	## run the components:
-	apt update -y
-	install_basic_toolset
-	if [ "$EXTENDED" == true ]; then
-		install_extended_toolset
-	fi
-	if [ "$REBOOT" == true ]; then
-		reboot_routine
-	else
-		echo "$WELCOME"
-		echo 'installation complete. rerun with -r to reboot after install'
-	fi
-}
-
-
-
-## the components
-
-install_basic_toolset() {
-	echo 'installing basic packages ...'
-
-	## apt packages
-	while read -r target; do
-		echo "installing: $target"
-		apt install -y "$target"
-	done <<EOF
-git
-curl
-zsh
-tree
-fastfetch
-neovim
-EOF
-
-
-
-	## all commands to be executed normally
-	while read -r command; do
-		eval "$command"
-	done <<EOF
 CHSH=no sh -c "\$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 apt -y upgrade
 chsh -s \$(which zsh) \${SUDO_USER:-\$USER}
@@ -205,5 +153,6 @@ SCRIPT
 	sleep 5
 	reboot
 } 
+
 #############################################################
 main "$@"
