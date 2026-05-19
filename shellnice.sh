@@ -69,16 +69,20 @@ fastfetch
 neovim
 EOF
 
-
-
-	## all commands to be executed normally
-	while read -r command; do
-		eval "$command"
-	done <<EOF
-CHSH=no sh -c "\$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+echo "running Postinstall commands"
+CHSH=no sh -c "\$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended 
 apt -y upgrade
 chsh -s \$(which zsh) \${SUDO_USER:-\$USER}
-EOF
+
+
+#	## all commands to be executed normally
+#	while read -r command; do
+#		eval "$command"
+#	done <<EOF
+#CHSH=no sh -c "\$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+#apt -y upgrade
+#chsh -s \$(which zsh) \${SUDO_USER:-\$USER}
+#EOF
 }
 
 
