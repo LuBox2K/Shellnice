@@ -72,7 +72,7 @@ EOF
 echo "running Postinstall commands"
 CHSH=no sh -c "\$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended 
 apt -y upgrade
-chsh -s \$(which zsh) \${SUDO_USER:-\$USER}
+chsh -s $(which zsh) ${SUDO_USER:-$USER}
 
 
 #	## all commands to be executed normally
